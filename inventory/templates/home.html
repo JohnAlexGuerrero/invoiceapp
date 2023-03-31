@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Inventario de productos</h2>
+
+<table class="sticky-table-headers">
+    <thead>
+        <tr class="sticky-table-headers__sticky">
+            <th>Item</th>
+            <th>Codebar</th>
+            <th>Description</th>
+            <th>Avalible</th>
+            <th>Unit</th>
+            <th>Unit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>1</td>
+                <td>{{product.codebar}}</td>
+                <td>{{product.name.title}}</td>
+                <td>230</td>
+                <td>unds</td>   
+                <td>
+                    <a href="{% url 'add_product_stock' product_slug=product.slug %}">Ingresar Stock</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% include 'create_product.html' with form=form title_modal="Agregar Producto" %}
+
+<style lang="css">
+    table{
+        border-collapse: collapse;
+
+    }
+
+    .sticky-table-headers__sticky {
+        /* Background color */
+        background-color: #9ca3af;
+        /* Stick to the left */
+        left: 0;
+        position: sticky;
+
+    
+        /* Displayed on top of other rows when scrolling */
+        z-index: 9999;
+
+        
+    }
+
+    .sticky-table-headers__sticky th{
+        width: auto;
+    }
+</style>
+{% endblock content %}

@@ -11,7 +11,7 @@ class Provider(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("Provider_detail", kwargs={"pk": self.pk})
+        return self.name
 
 class Bill(models.Model):
     provider = models.ForeignKey(Provider, verbose_name=("providers"), on_delete=models.CASCADE)
@@ -28,5 +28,5 @@ class Bill(models.Model):
         return f'{self.provider.name} {self.number}'
 
     def get_absolute_url(self):
-        return reverse("Bill_detail", kwargs={"pk": self.pk})
+        return self.provider.name
 

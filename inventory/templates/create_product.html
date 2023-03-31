@@ -1,0 +1,190 @@
+{% block content %}
+
+
+<button id="myBtn">{{title_modal}}</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="{% url 'home' %}" method="post" class="form">
+            {% csrf_token %}
+            <div class="credit-card-info--form">
+                {% for field in form %}
+                    <div class="input_container">
+                        <label class="input_label">{{ field.label }}</label>
+                        {{field}}
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="purchase--btn">Agregar Producto</button>
+        </form>
+    </div>
+
+</div>
+
+<style>
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .credit-card-info--form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .input_container {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .split {
+        display: grid;
+        grid-template-columns: 4fr 2fr;
+        gap: 15px;
+    }
+
+    .split input {
+        width: 100%;
+    }
+
+    .input_label {
+        font-size: 10px;
+        color: #8B8E98;
+        font-weight: 600;
+    }
+
+    input[type="text"] {
+        width: auto;
+        height: 40px;
+        padding: 0 0 0 16px;
+        border-radius: 9px;
+        outline: none;
+        background-color: #F2F2F2;
+        border: 1px solid #e5e5e500;
+        transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    }
+
+    input[type="text"]:focus {
+        border: 1px solid transparent;
+        box-shadow: 0px 0px 0px 2px #242424;
+        background-color: transparent;
+    }
+
+    .purchase--btn {
+        height: 55px;
+        background: #F2F2F2;
+        border-radius: 11px;
+        border: 0;
+        outline: none;
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 700;
+        background: linear-gradient(180deg, #363636 0%, #1B1B1B 50%, #000000 100%);
+        box-shadow: 0px 0px 0px 0px #FFFFFF, 0px 0px 0px 0px #000000;
+        transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    }
+
+    .purchase--btn:hover {
+        box-shadow: 0px 0px 0px 2px #FFFFFF, 0px 0px 0px 4px #0000003a;
+    }
+
+    /* Reset input number styles */
+    input[type="text"]::-webkit-outer-spin-button,
+    input_field[type="text"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+
+{% endblock content %}
